@@ -37,7 +37,7 @@ pipeline {
 		stage("deploy") {
 			steps {
 				echo 'deploying the app...'
-				echo "deploying version $(params.VERSION)"
+				echo "deploying version ${params.VERSION}"
 				//withCredentials([
 					//usernamePassword(credentials:'server_credentials', usernameVariable: USER, passwordVaraible: PWD)
 					//]) {
