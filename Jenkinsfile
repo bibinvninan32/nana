@@ -12,6 +12,9 @@ pipeline {
 		SERVER_CREDENTIALS = credentials('server_credentials')
 	}
 	stages {
+		//stage("init") {
+			//st
+		//}
 		stage("build") {
 			when {
 				expression {
@@ -19,6 +22,9 @@ pipeline {
 				}
 			}
 			steps {
+				script {
+
+				}
 				echo 'building the app...'
 				echo "building version ${NEW_VERSION}"
 				//sh 'mvn install'
@@ -27,7 +33,7 @@ pipeline {
 		stage("test") {
 			when {
 				expression {
-					param.executetests == true
+					params.executetests == true
 				}
 			}
 			steps {
