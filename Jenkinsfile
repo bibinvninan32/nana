@@ -1,3 +1,4 @@
+def gv
 pipeline {
 	agent any
 	parameters {
@@ -12,9 +13,13 @@ pipeline {
 		//SERVER_CREDENTIALS = credentials('server_credentials')
 	}
 	stages {
-		//stage("init") {
-			//st
-		//}
+		stage("init") {
+			steps {
+				script {
+					gv = load "script.groovy"
+				}
+			}
+		}
 		stage("build") {
 			when {
 				expression {
@@ -22,12 +27,9 @@ pipeline {
 				}
 			}
 			steps {
-				//script {
-
-				//}
-				echo 'building the app...'
-				echo "building version ${NEW_VERSION}"
-				//sh 'mvn install'
+				script {
+					gv.buildApp()
+				}
 			}
 		}
 		stage("test") {
@@ -37,19 +39,18 @@ pipeline {
 				}
 			}
 			steps {
-				echo 'testing the app...'
+				script {
+					gv.testApp()
+				}
 			}
 		}
 		stage("deploy") {
 			steps {
-				echo 'deploying the app...'
-				echo "deploying version ${params.VERSION}"
-				//withCredentials([
-					//usernamePassword(credentials:'server_credentials', usernameVariable: USER, passwordVariable: PWD)
-					//]) {
-						//echo "${USER} ${PWD}"
-				//}
+				script {
+					gv.deployApp()
+				}
 			}
 		}
 	}
+}
 }
