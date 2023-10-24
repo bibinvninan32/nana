@@ -21,10 +21,10 @@ pipeline {
 					BRANCH_NAME == 'dev'
 				}
 			}
-			steps {
-				script {
+			//steps {
+				//script {
 
-				}
+				//}
 				echo 'building the app...'
 				echo "building version ${NEW_VERSION}"
 				//sh 'mvn install'
