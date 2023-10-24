@@ -7,10 +7,10 @@ pipeline {
 	tools {
 		maven 'Maven3'
 	}
-	//environment {
-		//NEW_VERSION = '1.3.0'
-		//SERVER_CREDENTIALS = credentials('server_credentials')
-	//}
+	environment {
+		NEW_VERSION = '1.3.0'
+		SERVER_CREDENTIALS = credentials('server_credentials')
+	}
 	stages {
 		stage("build") {
 			when {
@@ -21,7 +21,7 @@ pipeline {
 			steps {
 				echo 'building the app...'
 				echo "building version ${NEW_VERSION}"
-				sh 'mvn install'
+				//sh 'mvn install'
 			}
 		}
 		stage("test") {
@@ -38,10 +38,10 @@ pipeline {
 			steps {
 				echo 'deploying the app...'
 				echo "deploying version ${params.VERSION}"
-				//withCredentials([
-					//usernamePassword(credentials:'server_credentials', usernameVariable: USER, passwordVaraible: PWD)
-					//]) {
-						//sh "${USER} ${PWD}"
+				withCredentials([
+					usernamePassword(credentials:'server_credentials', usernameVariable: USER, passwordVaraible: PWD)
+					]) {
+						echo "${USER} ${PWD}"
 				//}
 			}
 		}
