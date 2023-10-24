@@ -21,7 +21,7 @@ pipeline {
 					BRANCH_NAME == 'dev'
 				}
 			}
-			//steps {
+			steps {
 				//script {
 
 				//}
@@ -52,4 +52,5 @@ pipeline {
 			}
 		}
 	}
+}
 }
